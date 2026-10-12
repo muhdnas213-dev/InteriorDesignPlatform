@@ -1,0 +1,451 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | DesignNest</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #eee8df;
+            font-family: "DM Sans", sans-serif;
+            color: #302d29;
+        }
+
+        .navbar {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #302d29;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #a9684d;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #625d57;
+            font-size: 14px;
+        }
+
+        .page {
+            min-height: calc(100vh - 78px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 6% 60px;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 1080px;
+            min-height: 610px;
+            background: #fffdf9;
+            border-radius: 28px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 20px 60px rgba(62, 50, 40, 0.12);
+        }
+
+        /* LEFT FORM */
+
+        .form-section {
+            padding: 65px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .small-title {
+            color: #a9684d;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 46px;
+            line-height: 1.1;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #302d29;
+        }
+
+        .subtitle {
+            color: #817a72;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            max-width: 390px;
+        }
+
+        .error {
+            background: #f9e7e2;
+            color: #9a4e3b;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #45413c;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a69d94;
+            font-size: 16px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 52px;
+            border: 1px solid #ded8d0;
+            background: #faf8f4;
+            border-radius: 12px;
+            padding: 0 15px 0 45px;
+            font-family: inherit;
+            font-size: 14px;
+            color: #302d29;
+            outline: none;
+            transition: .25s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #b5785c;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(169, 104, 77, .08);
+        }
+
+        .login-btn {
+            width: 100%;
+            height: 54px;
+            border: none;
+            border-radius: 12px;
+            background: #a9684d;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: .25s;
+        }
+
+        .login-btn:hover {
+            background: #8f543d;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(169, 104, 77, .2);
+        }
+
+        .bottom-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #837c74;
+            font-size: 13px;
+        }
+
+        .bottom-text a {
+            color: #a9684d;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 18px;
+            text-align: center;
+            color: #837c74;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /* IMAGE */
+
+        .image-section {
+            position: relative;
+            min-height: 610px;
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(35, 29, 24, .62),
+                    rgba(35, 29, 24, .04)
+                ),
+                url("{% static 'login image.jpg' %}")
+                center / cover;
+        }
+
+        .image-content {
+            position: absolute;
+            left: 45px;
+            right: 45px;
+            bottom: 42px;
+            color: white;
+        }
+
+        .image-content h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 35px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .image-content p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(255,255,255,.82);
+            max-width: 330px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,.16);
+            border: 1px solid rgba(255,255,255,.28);
+            backdrop-filter: blur(8px);
+            padding: 8px 13px;
+            border-radius: 50px;
+            font-size: 11px;
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                padding: 0 25px;
+            }
+
+            .auth-container {
+                grid-template-columns: 1fr;
+                max-width: 550px;
+            }
+
+            .image-section {
+                min-height: 300px;
+                order: -1;
+            }
+
+            .form-section {
+                padding: 45px 35px;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .page {
+                padding: 15px;
+            }
+
+            .navbar {
+                height: 70px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .auth-container {
+                border-radius: 20px;
+            }
+
+            .form-section {
+                padding: 35px 25px;
+            }
+
+            .image-section {
+                min-height: 250px;
+            }
+
+            .image-content {
+                left: 25px;
+                right: 25px;
+                bottom: 25px;
+            }
+
+            .image-content h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        Design<span>Nest</span>
+    </a>
+
+    <a href="{% url 'home' %}" class="nav-link">
+        ← Back to Home
+    </a>
+
+</nav>
+
+
+<main class="page">
+
+    <div class="auth-container">
+
+        <!-- LOGIN FORM -->
+
+        <section class="form-section">
+
+            <div class="small-title">
+                Welcome Back
+            </div>
+
+            <h1>Sign in to<br>DesignNest</h1>
+
+            <p class="subtitle">
+                Continue your interior design journey and bring
+                your dream spaces to life.
+            </p>
+
+
+            {% if error %}
+                <div class="error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="field">
+
+                    <label>Username</label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">◯</span>
+
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Enter your username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Password</label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">●</span>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="login-btn">
+                    Sign In
+                </button>
+
+            </form>
+
+
+            <p class="bottom-text">
+                Don't have an account?
+                <a href="{% url 'signup' %}">Create one</a>
+            </p>
+
+            <a href="{% url 'home' %}" class="home-link">
+                Explore DesignNest
+            </a>
+
+        </section>
+
+
+        <!-- IMAGE -->
+
+        <section class="image-section">
+
+            <div class="image-content">
+
+                <span class="badge">
+                    INTERIORS • IDEAS • INSPIRATION
+                </span>
+
+                <h2>
+                    Spaces that feel<br>
+                    like you.
+                </h2>
+
+                <p>
+                    Discover thoughtful interiors, collaborate
+                    with designers, and turn your vision into
+                    a beautiful space.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+</html>

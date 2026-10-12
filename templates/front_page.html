@@ -1,0 +1,833 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DesignNest | Interior Design Platform</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: #17252b;
+            background: #faf9f6;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 68px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10.5%;
+            border-bottom: 1px solid #eeeae5;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            font-size: 31px;
+            color: #17252b;
+        }
+
+        .brand-name {
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            color: #17252b;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: #555;
+            margin-left: 12px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            position: relative;
+            text-decoration: none;
+            color: #333;
+            font-size: 13px;
+            padding: 25px 0;
+        }
+
+        .nav-links a.active::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 36px;
+            height: 2px;
+            background: #a9573b;
+        }
+/* HERO BUTTONS */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.btn-get-started,
+.btn-explore {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 24px;
+    min-height: 48px;
+    border-radius: 30px;
+    text-decoration: none !important;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Get Started */
+
+.btn-get-started {
+    background: #a9684d;
+    color: #ffffff !important;
+    border: 1px solid #a9684d;
+}
+
+.btn-get-started:hover {
+    background: #8f543d;
+    border-color: #8f543d;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(169, 104, 77, 0.22);
+}
+
+/* Explore Designers */
+
+.btn-explore {
+    background: transparent;
+    color: #302d29 !important;
+    border: 1px solid #9c958d;
+}
+
+.btn-explore:hover {
+    background: #302d29;
+    color: #ffffff !important;
+    border-color: #302d29;
+    transform: translateY(-2px);
+}
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 455px;
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(250,248,244,0.98) 0%,
+                    rgba(250,248,244,0.91) 27%,
+                    rgba(250,248,244,0.25) 52%,
+                    rgba(250,248,244,0) 70%
+                ),
+                url("{% static 'hero.jpg.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            width: 1080px;
+            max-width: 90%;
+            margin: auto;
+        }
+
+        .hero-text {
+            width: 440px;
+        }
+
+        .small-title {
+            color: #a9573b;
+            font-size: 14px;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-weight: 500;
+            font-size: 52px;
+            line-height: 1.02;
+            margin-bottom: 18px;
+            color: #18282e;
+        }
+
+        .hero p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 22px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            background: #ae5b3e;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 13px;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #293238;
+            border: 1px solid #7b8080;
+            padding: 11px 25px;
+            border-radius: 25px;
+            font-size: 13px;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+            padding: 34px 8% 22px;
+            text-align: center;
+            background: #faf9f6;
+        }
+
+        .section-label {
+            color: #ad5c40;
+            letter-spacing: 2.5px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .services h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 29px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .service-grid {
+            max-width: 1080px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .service-card {
+            min-height: 190px;
+            border: 1px solid #ddd9d2;
+            border-radius: 6px;
+            padding: 17px 25px;
+            background: rgba(255,255,255,0.25);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .service-icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 11px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .icon-home {
+            background: #e1e7e2;
+        }
+
+        .icon-design {
+            background: #eadbd3;
+        }
+
+        .icon-quote {
+            background: #dce5eb;
+        }
+
+        .icon-project {
+            background: #e5dce5;
+        }
+
+        .service-card h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           STATS SECTION
+        ========================= */
+
+        .stats {
+            min-height: 150px;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(50,61,47,0.85),
+                    rgba(75,83,65,0.86)
+                ),
+                url("{% static 'images/hero.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .stats-container {
+            width: 1080px;
+            max-width: 90%;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .stats-text h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            font-weight: 400;
+            margin-bottom: 7px;
+        }
+
+        .stats-text p {
+            max-width: 380px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #f0f0ec;
+        }
+
+        .stats-numbers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .stat {
+            text-align: center;
+            border-left: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .stat:first-child {
+            border-left: none;
+        }
+
+        .stat i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-number {
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .nav-right {
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                padding: 30px 0;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+                padding: 15px 6%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .brand-name {
+                font-size: 21px;
+            }
+
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                gap: 17px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 0;
+            }
+
+            .nav-links a.active::after {
+                bottom: -3px;
+            }
+
+            .get-started {
+                padding: 9px 14px;
+                font-size: 11px;
+            }
+
+            .hero {
+                min-height: 600px;
+                background-position: 62% center;
+            }
+
+            .hero-content {
+                max-width: 88%;
+                align-self: flex-start;
+                padding-top: 55px;
+            }
+
+            .hero-text {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .hero-buttons {
+                flex-wrap: wrap;
+            }
+
+            .services {
+                padding: 40px 6%;
+            }
+
+            .services h2 {
+                font-size: 25px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                min-height: auto;
+                padding: 25px;
+            }
+
+            .stats {
+                padding: 35px 0;
+            }
+
+            .stats-container {
+                max-width: 88%;
+            }
+
+            .stats-numbers {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stat-number {
+                font-size: 17px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="brand">
+
+        <i class="bi bi-house brand-icon"></i>
+
+        <span class="brand-name">
+            DesignNest
+        </span>
+
+        <span class="brand-subtitle">
+            Interior Design Platform
+        </span>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <nav class="nav-links">
+
+            <a href="/" class="active">
+                Home
+            </a>
+
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </nav>
+
+        <a href="{% url 'login' %}" class="btn-get-started">
+          Get Started
+    <i class="bi bi-arrow-right ms-2"></i>
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-text">
+
+            <div class="small-title">
+                INTERIOR DESIGN PLATFORM
+            </div>
+
+            <h1>
+                Beautiful Spaces
+                <br>
+                Start Here
+            </h1>
+
+            <p>
+                Connect with professional interior designers,
+                share your room details, get creative design
+                proposals and quotations, and turn your space
+                into something extraordinary.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'login' %}" class="btn-explore">
+                    Explore Designers
+                <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+
+                <a href="#" class="btn-secondary">
+                    How It Works
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section class="services" id="services">
+
+    <div class="section-label">
+        OUR SERVICES
+    </div>
+
+    <h2>
+        Your Complete Interior Design Journey
+    </h2>
+
+    <p class="section-description">
+        From inspiration to installation, we're with you every step of the way.
+    </p>
+
+
+    <div class="service-grid">
+
+
+        <!-- CARD 1 -->
+
+        <div class="service-card">
+
+            <div class="service-icon icon-home">
+                <i class="bi bi-house"></i>
+            </div>
+
+            <h3>
+                Share Your Space
+            </h3>
+
+            <p>
+                Upload room photos, add dimensions,
+                and tell us your style and budget.
+            </p>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="service-card">
+
+            <div class="service-icon icon-design">
+                <i class="bi bi-palette"></i>
+            </div>
+
+            <h3>
+                Get Design Proposals
+            </h3>
+
+            <p>
+                Receive personalized designs
+                from professional interior designers.
+            </p>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+
+        <div class="service-card">
+
+            <div class="service-icon icon-quote">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+
+            <h3>
+                Review Quotations
+            </h3>
+
+            <p>
+                Compare detailed cost estimates,
+                request revisions, and choose your favourite.
+            </p>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+
+        <div class="service-card">
+
+            <div class="service-icon icon-project">
+                <i class="bi bi-calendar"></i>
+            </div>
+
+            <h3>
+                Track Your Project
+            </h3>
+
+            <p>
+                Stay updated on progress, communicate
+                with your designer, and see your vision come to life.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS / ABOUT
+========================= -->
+
+<section class="stats" id="about">
+
+    <div class="stats-container">
+
+
+        <div class="stats-text">
+
+            <h2>
+                Better Design. A Brighter You.
+            </h2>
+
+            <p>
+                We make interior design simple,
+                accessible, and tailored to your
+                unique style and needs.
+            </p>
+
+        </div>
+
+
+        <div class="stats-numbers">
+
+
+            <div class="stat">
+
+                <i class="bi bi-people"></i>
+
+                <div class="stat-number">
+                    100+
+                </div>
+
+                <div class="stat-label">
+                    Professional Designers
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <i class="bi bi-house"></i>
+
+                <div class="stat-number">
+                    1,000+
+                </div>
+
+                <div class="stat-label">
+                    Happy Clients
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <i class="bi bi-star"></i>
+
+                <div class="stat-number">
+                    4.8/5
+                </div>
+
+                <div class="stat-label">
+                    Average Rating
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</body>
+</html>

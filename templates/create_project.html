@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Project | DesignNest</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f1eb;
+            color: #302d29;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .navbar {
+            height: 78px;
+            background: #fffdf9;
+            border-bottom: 1px solid #e7e0d8;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+            color: #302d29;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #a9684d;
+        }
+
+        .back {
+            color: #756d65;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .page {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 55px 0 80px;
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .small-title {
+            color: #a9684d;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #817a72;
+            font-size: 14px;
+        }
+
+        .form-card {
+            background: #fffdf9;
+            border: 1px solid #e5ded5;
+            border-radius: 22px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(50, 40, 30, .06);
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .section-description {
+            color: #837c74;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid #ddd5cc;
+            background: #faf8f4;
+            border-radius: 11px;
+
+            padding: 13px 15px;
+
+            font-family: inherit;
+            font-size: 14px;
+            color: #302d29;
+
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #a9684d;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(169,104,77,.08);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .style-option input {
+            display: none;
+        }
+
+        .style-option label {
+            border: 1px solid #ddd5cc;
+            background: #faf8f4;
+            border-radius: 11px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .style-option input:checked + label {
+            background: #f5e8e1;
+            border-color: #a9684d;
+            color: #8f543d;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #eee8e0;
+        }
+
+        .cancel {
+            padding: 12px 22px;
+            border: 1px solid #d4ccc3;
+            border-radius: 11px;
+            color: #6f6861;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .submit {
+            border: none;
+            background: #a9684d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 11px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background: #8f543d;
+        }
+
+        @media (max-width: 650px) {
+
+            .page {
+                width: 92%;
+                padding-top: 35px;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .style-options {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .cancel,
+            .submit {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        Design<span>Nest</span>
+    </a>
+
+    <a href="{% url 'client_dashboard' %}" class="back">
+        ← Back to Dashboard
+    </a>
+
+</nav>
+
+
+<main class="page">
+
+    <div class="heading">
+
+        <div class="small-title">
+            New Project
+        </div>
+
+        <h1>
+            Tell us about your space.
+        </h1>
+
+        <p>
+            Start by sharing a few details about the interior
+            you want to create.
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <div class="section-title">
+            Project Details
+        </div>
+
+        <div class="section-description">
+            You can update these details later.
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="field">
+
+                <label for="name">
+                    Project Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Example: My Dream Living Room"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="description">
+                    Tell us about your project
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe your space, what you want to change, your requirements, etc."
+                ></textarea>
+
+            </div>
+
+
+            <div class="two-columns">
+
+                <div class="field">
+
+                    <label for="budget">
+                        Approximate Budget (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="budget"
+                        name="budget"
+                        placeholder="Example: 500000"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Preferred Style
+                    </label>
+
+                    <select name="style">
+
+                        <option value="">
+                            Select a style
+                        </option>
+
+                        <option value="Modern">
+                            Modern
+                        </option>
+
+                        <option value="Minimalist">
+                            Minimalist
+                        </option>
+
+                        <option value="Contemporary">
+                            Contemporary
+                        </option>
+
+                        <option value="Traditional">
+                            Traditional
+                        </option>
+
+                        <option value="Luxury">
+                            Luxury
+                        </option>
+
+                        <option value="Scandinavian">
+                            Scandinavian
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <a
+                    href="{% url 'client_dashboard' %}"
+                    class="cancel"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="submit"
+                >
+                    Create Project →
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

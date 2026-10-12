@@ -1,0 +1,555 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | DesignNest</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #eee8df;
+            font-family: "DM Sans", sans-serif;
+            color: #302d29;
+        }
+
+        .navbar {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #302d29;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #a9684d;
+        }
+
+        .nav-link {
+            color: #625d57;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .page {
+            min-height: calc(100vh - 78px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 6% 60px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 1100px;
+            background: #fffdf9;
+            border-radius: 28px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            box-shadow: 0 20px 60px rgba(62, 50, 40, .12);
+        }
+
+        /* IMAGE */
+
+        .image-section {
+            min-height: 690px;
+            position: relative;
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(35, 29, 24, .65),
+                    rgba(35, 29, 24, .05)
+                ),
+                url("{% static 'signup image.jpg' %}")
+                center / cover;
+        }
+
+        .image-content {
+            position: absolute;
+            left: 45px;
+            right: 45px;
+            bottom: 45px;
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 13px;
+            border-radius: 50px;
+            background: rgba(255,255,255,.16);
+            border: 1px solid rgba(255,255,255,.28);
+            backdrop-filter: blur(8px);
+            font-size: 11px;
+            margin-bottom: 18px;
+        }
+
+        .image-content h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 37px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .image-content p {
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 320px;
+            color: rgba(255,255,255,.82);
+        }
+
+        /* FORM */
+
+        .form-section {
+            padding: 50px 65px;
+        }
+
+        .small-title {
+            color: #a9684d;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #817a72;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .form-error {
+            color: #a14e3c;
+            background: #fae9e4;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .field {
+            margin-bottom: 17px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #4c4843;
+        }
+
+        .field input[type="text"],
+        .field input[type="email"],
+        .field input[type="password"] {
+            width: 100%;
+            height: 48px;
+            border: 1px solid #ded8d0;
+            border-radius: 11px;
+            background: #faf8f4;
+            padding: 0 14px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: .2s;
+        }
+
+        .field input:focus {
+            border-color: #b5785c;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(169,104,77,.08);
+        }
+
+        /* ROLE */
+
+        .role-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #4c4843;
+            margin-bottom: 9px;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .role-option {
+            position: relative;
+        }
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .role-card {
+            display: block;
+            border: 1px solid #ded8d0;
+            background: #faf8f4;
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .role-card strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .role-card span {
+            font-size: 11px;
+            color: #89827a;
+        }
+
+        .role-option input:checked + .role-card {
+            border-color: #a9684d;
+            background: #f8eee9;
+            box-shadow: 0 0 0 2px rgba(169,104,77,.08);
+        }
+
+        .create-btn {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 12px;
+            background: #a9684d;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: .25s;
+        }
+
+        .create-btn:hover {
+            background: #8f543d;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(169,104,77,.2);
+        }
+
+        .bottom-text {
+            text-align: center;
+            color: #817a72;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .bottom-text a {
+            color: #a9684d;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .signup-container {
+                grid-template-columns: 1fr;
+                max-width: 560px;
+            }
+
+            .image-section {
+                min-height: 300px;
+                order: -1;
+            }
+
+            .form-section {
+                padding: 45px 40px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                padding: 0 22px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .nav-link {
+                font-size: 12px;
+            }
+
+            .page {
+                padding: 15px;
+            }
+
+            .signup-container {
+                border-radius: 20px;
+            }
+
+            .form-section {
+                padding: 35px 24px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .role-options {
+                grid-template-columns: 1fr;
+            }
+
+            .image-section {
+                min-height: 240px;
+            }
+
+            .image-content {
+                left: 25px;
+                right: 25px;
+                bottom: 25px;
+            }
+
+            .image-content h2 {
+                font-size: 29px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        Design<span>Nest</span>
+    </a>
+
+    <a href="{% url 'home' %}" class="nav-link">
+        ← Back to Home
+    </a>
+
+</nav>
+
+
+<main class="page">
+
+    <div class="signup-container">
+
+
+        <!-- IMAGE -->
+
+        <section class="image-section">
+
+            <div class="image-content">
+
+                <span class="badge">
+                    DESIGN • CREATE • TRANSFORM
+                </span>
+
+                <h2>
+                    Your space.<br>
+                    Your story.
+                </h2>
+
+                <p>
+                    Join DesignNest and connect with the right
+                    people to create interiors you'll love.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FORM -->
+
+        <section class="form-section">
+
+            <div class="small-title">
+                Get Started
+            </div>
+
+            <h1>
+                Create your<br>
+                DesignNest account
+            </h1>
+
+            <p class="subtitle">
+                Whether you're creating your dream home or
+                designing beautiful spaces, you're in the right place.
+            </p>
+
+
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="field">
+
+                    <label>Username</label>
+
+                    {{ form.username }}
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="field">
+
+                    <label>Email Address</label>
+
+                    {{ form.email }}
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="role-title">
+                    I am joining as
+                </div>
+
+                <div class="role-options">
+
+                    {% for radio in form.role %}
+
+                        <div class="role-option">
+
+                            {{ radio.tag }}
+
+                            <label
+                                for="{{ radio.id_for_label }}"
+                                class="role-card"
+                            >
+
+                                {% if radio.choice_label == "Client" %}
+
+                                    <strong>🏠 Client</strong>
+
+                                    <span>
+                                        I want to design my space
+                                    </span>
+
+                                {% else %}
+
+                                    <strong>✦ Interior Designer</strong>
+
+                                    <span>
+                                        I design beautiful spaces
+                                    </span>
+
+                                {% endif %}
+
+                            </label>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="field">
+
+                    <label>Password</label>
+
+                    {{ form.password }}
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="field">
+
+                    <label>Confirm Password</label>
+
+                    {{ form.confirm_password }}
+
+                </div>
+
+
+                {% if form.errors %}
+
+                    <div class="form-error">
+
+                        Please check the information entered above.
+
+                    </div>
+
+                {% endif %}
+
+
+                <button
+                    type="submit"
+                    class="create-btn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <p class="bottom-text">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Sign in
+                </a>
+
+            </p>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+</html>
